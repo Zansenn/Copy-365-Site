@@ -1,6 +1,8 @@
 #The user will be asked to input a command
 #When list of commands is determined remeber to add a list of them to test if
 #the user is inputting the right thing, use a while loop like you have below for y/n
+import json
+
 usrquery = input("What would you like to do? \nchange master directory enter cm\n")
 #changing the the master directory
 if usrquery == "cm":
@@ -20,7 +22,7 @@ while usrquery == "cm":
         continue
 
 #storing mstr_dir variable
-import json
+
 data = mstr_dir
 with open('mstr_dir.txt', 'w') as outfile:
     json.dump(data, outfile)
