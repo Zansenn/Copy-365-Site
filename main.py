@@ -1,8 +1,10 @@
 #this is the central module that will call the other modules
 #here we will list all possible user commands
 
+#import sys
+print(sys.path)
+sys.path.append('C:\\Users\\Naz Sen\\Documents\\Programs\\Programming\\Copy 365 Site')
 correct_command = ("cdir", "cm", "end")
-assignmstr = 0
 userquery = 0
 usercopy = 0
 while userquery is not correct_command:

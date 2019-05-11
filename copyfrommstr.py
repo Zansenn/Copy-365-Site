@@ -21,7 +21,7 @@ while correct_input == ("y","n"):
         break
     if usercopy == "n":
 #if the user answers no here then they will be able to change the master directory
-        import assignmstr.py
+        import assignmstr
         usercopy =input("please write y/n\n")
         continue
     if usercopy is not correct_input:
