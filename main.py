@@ -14,9 +14,9 @@ while userquery is not correct_command:
         end()
     if userquery == "cdir":
         #usercopy == "cdir"
-        import copyfrommstr.py
+        import copyfrommstr
         continue
     if userquery == "cm":
         userquery = 0
-        import assignmstr.py
+        import assignmstr
         continue
