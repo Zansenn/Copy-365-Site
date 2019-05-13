@@ -1,0 +1,155 @@
+#This is the main script
+import json
+import shutil
+correct_command = ("cdir", "cm", "end")
+correct_input = ("y","n")
+#function to reassign the master directory
+
+def assignmstr():
+    userquery = "cm"
+    mstr_dir = input("insert new master directory\n")
+    #testing user input is correct
+    while userquery == "cm":
+        userquery_1 = input(mstr_dir + "\n is this correct? enter y or n\n")
+        if userquery_1 == "y":
+            print(mstr_dir)
+            break
+        if userquery_1 == "n":
+            mstr_dir = input("insert correct master directory \n")
+            continue
+        if userquery_1 is not correct_input:
+            userquery_1 = input("write y or n \n")
+            continue
+
+#storing mstr_dir variable
+    data = mstr_dir
+    with open('mstr_dir.txt', 'w') as outfile:
+        json.dump(data, outfile)
+
+    print(mstr_dir)
+
+#create the individial file paths for each folder that we need to copy to
+def makefilelocations():
+    with open('mstr_dir.txt') as json_file:
+        mstr_dir = json.load(json_file)
+
+    Administration = '{}\\Administration'.format(mstr_dir)
+    Archive = '{}\\Archive-Site'.format(mstr_dir)
+    Care_Coordinator = '{}\\Care Coodinator'.format(mstr_dir)
+    Care_Management = '{}\\Care Management'.format(mstr_dir)
+    Finance_Management = '{}\\Finance Management'.format(mstr_dir)
+    Human_Resources = '{}\\Human Resources'.format(mstr_dir)
+    Image_Library = '{}\\Image Library'.format(mstr_dir)
+    Meetings = '{}\\Archive'.format(mstr_dir)
+    Recruitment = '{}\\Recruitment'.format(mstr_dir)
+    Retail_Shop = '{}\\Retail Shop'.format(mstr_dir)
+
+#function to copy from the master directory to a new directory
+def copymstr():
+    with open('mstr_dir.txt') as json_file:
+        mstr_dir = json.load(json_file)
+        print(mstr_dir)
+    #else:
+        #exit()
+    print("above is the directory you will copy to: \n")
+    userquery_1 = input("is this correct? y/n\n")
+    #testing that the user has inputted the correct information
+    while correct_input == ("y","n"):
+        if userquery_1 == ("y"):
+            break
+        if userquery_1 == "n":
+    #if the user answers no here then they will be able to change the master directory
+            assignmstr()
+            userquery_1 =input("Is this correct?\nPlease write y/n\n")
+            continue
+        if userquery_1 is not correct_input:
+            userquery_1 = input("Is this correct?\nplease write y/n\n")
+            continue
+    print(mstr_dir)
+    trgt_dir = input("please input target the target directory\n")
+#testing if the user input is correct (i am not sure if this works as intented)
+#insert user test when it is working
+    #usr_test()
+
+    AdministrationT = '{}\\Administration - Documents'.format(trgt_dir)
+    ArchiveT = '{}\\Archive -Site Documents'.format(trgt_dir)
+    Care_CoordinatorT = '{}\\Care Coodinator - Documents'.format(trgt_dir)
+    Care_ManagementT = '{}\\Care Management - Documents'.format(trgt_dir)
+    Finance_ManagementT = '{}\\Finance Management - Documents'.format(trgt_dir)
+    Human_ResourcesT = '{}\\Human Resources - Documents'.format(trgt_dir)
+    Image_LibraryT = '{}\\Image Library - Documents'.format(trgt_dir)
+    MeetingsT = '{}\\Archive - Documents'.format(trgt_dir)
+    RecruitmentT = '{}\\Recruitment - Documents'.format(trgt_dir)
+    Retail_ShopT = '{}\\Retail Shop - Documents'.format(trgt_dir)
+
+    print(AdministrationT)
+    print(ArchiveT)
+    print(Care_CoordinatorT)
+    print(Care_ManagementT)
+    print(Finance_ManagementT)
+    print(Human_ResourcesT)
+    print(Image_LibraryT)
+    print(MeetingsT)
+    print(RecruitmentT)
+    print(Retail_ShopT)
+
+#WHY DOES THIS NOT WORKKK
+#Some issue with shutil? or issue with copyall()>>>
+    userquery_1 = input("Is this correct?\ny/n\n")
+    while correct_input == ("y", "n"):
+        if userquery_1 is not correct_input:
+            continue
+        if userquery_1 == ("y"):
+            copyall()
+        if userquery_1 == ("n"):
+            main_script()
+
+    #main_script()
+
+#usr_test doesnt work, when it is inputed and n is selected it does not run main_script
+# if yes is selected loop does not break
+def usr_test():
+    userquery_1 = input("is this correct? y/n\n")
+    while correct_input == ("y", "n"):
+        if userquery_1 is not correct_input:
+            continue
+        if userquery_1 == ("y"):
+            break
+        if userquery_1 == ("n"):
+            main_script()
+
+#print("".join(Archive)) ==>how to print without the comma and brackets
+def main_script():
+    userquery = 0
+    while userquery is not correct_command:
+        userquery= input('What would you like to do?\nchange master directory enter\
+         cm\n copy from master directory to a new location type cdir\n leave type end\n')
+        if userquery == "end":
+            break
+            end()
+        if userquery == "cdir":
+            #usercopy == "cdir"
+            copymstr()
+            continue
+        if userquery == "cm":
+            userquery = 0
+            assignmstr()
+            continue
+
+def copyall():
+    shutil.copyfile(Administration, AdministrationT)
+    shutil.copyfile(Archive, ArchiveT)
+    shutil.copyfile(Care_Coordinator, Care_CoordinatorT)
+    shutil.copyfile(Care_Management, Care_ManagementT)
+    shutil.copyfile(Finance_Management, Finance_ManagementT)
+    shutil.copyfile(Human_Resources, Human_ResourcesT)
+    shutil.copyfile(Image_Library, Image_LibraryT)
+    shutil.copyfile(Meetings, MeetingsT)
+    shutil.copyfile(Recruitment, RecruitmentT)
+    shutil.copyfile(Retail_Shop, Retail_ShopT)
+
+    print("complete")
+    main_script()
+#Start of the code is here
+
+main_script()
