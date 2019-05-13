@@ -28,7 +28,7 @@ def assignmstr():
 
     print(mstr_dir)
 
-#create the individial file paths for each folder that we need to copy to
+#create the individial file paths for each folder that we need to copy to (this works)
 def makefilelocations():
     with open('mstr_dir.txt') as json_file:
         mstr_dir = json.load(json_file)
@@ -65,7 +65,9 @@ def copymstr():
         if userquery_1 is not correct_input:
             userquery_1 = input("Is this correct?\nplease write y/n\n")
             continue
-    print(mstr_dir)
+    makefilelocations()
+    print(Administration)
+    print(Archive)
     trgt_dir = input("please input target the target directory\n")
 #testing if the user input is correct (i am not sure if this works as intented)
 #insert user test when it is working
@@ -96,13 +98,16 @@ def copymstr():
 #WHY DOES THIS NOT WORKKK
 #Some issue with shutil? or issue with copyall()>>>
     userquery_1 = input("Is this correct?\ny/n\n")
-    while correct_input == ("y", "n"):
-        if userquery_1 is not correct_input:
-            continue
-        if userquery_1 == ("y"):
-            copyall()
-        if userquery_1 == ("n"):
-            main_script()
+    if userquery_1 == "y":
+        copyall()
+        end()
+    #while correct_input == ("y", "n"):
+    #    if userquery_1 is not correct_input:
+    #        continue
+    #    if userquery_1 == ("y"):
+    #        copyall()
+    #    if userquery_1 == ("n"):
+    #        main_script()
 
     #main_script()
 
